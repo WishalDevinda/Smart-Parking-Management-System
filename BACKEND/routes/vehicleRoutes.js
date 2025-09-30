@@ -1,13 +1,18 @@
-// declaring a variable to get the express router function
+// routes/vehicleRoutes.js
+// Purpose: HTTP route map for all vehicle-related endpoints.
+
 const router = require("express").Router();
-const VehicleController = require("../controllers/vehicleController");
+const C = require("../controllers/vehicleController");
 
-// define routes for vehicle operations
-router.post("/", VehicleController.registerVehicle);
-router.get("/", VehicleController.getAllVehicles);              // get all vehicles
-router.get("/:id", VehicleController.getVehicleByID);           // get vehicle by ID
-router.put("/:id", VehicleController.updateVehicle);            // update vehicle
-router.delete("/:id", VehicleController.deleteVehicle);         // delete vehicle
+// Core CRUD
+router.post("/", C.registerVehicle);
+router.get("/", C.getAllVehicles);
+router.get("/:id", C.getVehicleByID);
+router.put("/:id", C.updateVehicle);
+router.delete("/:id", C.deleteVehicle);
 
-// export the router
+// Counter workflow
+router.get("/number/:vehicleNumber", C.getVehicleByNumber);
+router.post("/exit", C.exitVehicleByNumber);
+
 module.exports = router;

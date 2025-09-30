@@ -19,7 +19,7 @@ const vehicleRouter = require("./routes/vehicleRoutes");
 const systemHardwareRouter = require("./routes/systemHardwareRoutes");
 
 //use routes in app.js
-app.use("/vehicle", vehicleRouter);
+app.use("/vehicles", vehicleRouter);
 app.use("/systemHardware", systemHardwareRouter);
 
 //get the mongoDB connection string from the .env file

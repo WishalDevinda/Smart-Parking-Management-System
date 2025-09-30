@@ -1,0 +1,93 @@
+/* Purpose: Styling for SystemHardware page. Matches your existing gradient/card style. */
+
+:root{
+  --paper:#FAFDFF;
+  --white:#FFFFFF;
+  --blue:#0074D5;
+  --green:#069B47;
+  --red:#C80306;
+  --ink:#262525;
+  --charcoal:#40403E;
+  --border:#E5E7EB;
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;
+  background:var(--paper);
+  color:var(--ink);
+}
+
+.hw-page{padding:2rem;min-height:100vh}
+
+/* Header */
+.hw-header{
+  background:linear-gradient(135deg,var(--blue),var(--green));
+  padding:2rem;
+  border-radius:15px;
+  margin-bottom:2rem;
+  color:var(--white);
+  box-shadow:0 8px 25px rgba(0,116,213,0.2);
+}
+.hw-title{margin:0 0 .25rem 0;font-size:2rem;font-weight:800}
+.hw-sub{margin:0;opacity:.9}
+
+/* Cards */
+.card{
+  background:var(--white);
+  border-radius:12px;
+  padding:1.25rem;
+  margin-bottom:2rem;
+  box-shadow:0 4px 14px rgba(0,0,0,.06);
+}
+.cardTitle{margin:0 0 1rem 0;color:var(--charcoal)}
+
+/* Form */
+.hw-form{display:grid;gap:12px;max-width:640px}
+.row{display:grid;gap:6px}
+.row label{font-size:14px;color:var(--charcoal)}
+.row input,.row select{
+  font-size:14px;padding:10px 12px;border-radius:10px;border:1px solid var(--border);outline:none
+}
+.actions{display:flex;gap:8px}
+.primaryBtn{
+  background:var(--green);color:#fff;padding:10px 16px;border:0;border-radius:999px;font-weight:700;cursor:pointer
+}
+.secondaryBtn{
+  background:#f3f4f6;color:#111827;padding:10px 16px;border:0;border-radius:999px;font-weight:600;cursor:pointer
+}
+.primaryBtn:disabled{background:#9CCEB1;cursor:not-allowed}
+
+/* Toast */
+.toast{padding:10px;margin-bottom:12px;border-radius:8px;font-size:14px;font-weight:500}
+.toast.success{background:#d4edda;color:#155724}
+.toast.error{background:#f8d7da;color:#721c24}
+
+/* Lookup */
+.lookup{display:flex;gap:8px;align-items:center}
+.lookupInput{
+  flex:1;font-size:14px;padding:10px 12px;border-radius:10px;border:1px solid var(--border);outline:none
+}
+
+/* Table */
+.tableTop{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.searchInput{
+  font-size:14px;padding:10px 12px;border-radius:10px;border:1px solid var(--border);outline:none;max-width:320px
+}
+.tableWrap{overflow-x:auto;margin-top:12px}
+.hw-table{width:100%;border-collapse:collapse}
+.hw-table th,.hw-table td{padding:8px;border-bottom:1px solid var(--border);text-align:left}
+.idCell{font-weight:700;color:var(--blue)}
+.strong{font-weight:600}
+.cap{text-transform:capitalize}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#6b7280}
+.center{text-align:center}
+.muted{color:#6b7280}
+
+.rowActions{display:flex;gap:10px}
+.linkBtn{
+  background:transparent;border:0;color:var(--blue);cursor:pointer;padding:0
+}
+.linkBtn.danger{color:var(--red)}

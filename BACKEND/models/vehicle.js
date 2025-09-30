@@ -1,62 +1,20 @@
-//declaring variables to assign installed packeges
+// models/vehicle.js
+// Purpose: The MongoDB schema used by the controller.
+
 const mongoose = require("mongoose");
 
-//create a new mongoose schema
 const VehicleSchema = new mongoose.Schema(
   {
-    //vehicleID
-    vehicleID: { 
-        type: String, 
-        unique: true, 
-        index: true, 
-        //required: true 
-    },
-
-    //vehicleNumber
-    vehicleNumber: { 
-        type: String, 
-        //required: true, 
-        trim: true 
-    },
-    
-    //vehicleType
-    vehicleType: { 
-        type: String, 
-        //required: true 
-    },
-
-    //date
-    date: {
-        type: String,
-        required: true
-    },
-
-    //entryTime
-    entryTime: { 
-        type: String,
-        required: true
-    },
-
-    //exitTime
-    exitTime: { 
-        type: String,
-        default: null
-    },
-
-    //duration
-    duration: {
-        type: Number,
-        default: null
-    },
-
-    // slotID(foreign key)
-    slotID: { 
-        type: String,
-        default: null, 
-        ref: "Slot" 
-    },
-  }
+    vehicleID: { type: String, unique: true, index: true },
+    vehicleNumber: { type: String, trim: true },
+    vehicleType: { type: String },
+    date: { type: String, required: true },      // YYYY-MM-DD
+    entryTime: { type: String, required: true }, // HH:MM:SS
+    exitTime: { type: String, default: null },
+    duration: { type: Number, default: null },   // hours (float)
+    slotID: { type: String, default: null, ref: "Slot" },
+  },
+  { timestamps: true }
 );
 
-//export the vehicle model
 module.exports = mongoose.model("Vehicle", VehicleSchema);
