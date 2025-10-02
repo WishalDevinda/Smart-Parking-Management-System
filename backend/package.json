@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Smart-Parking-Management-System-(AutoSlot)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WishalDevinda/Smart-Parking-Management-System.git"
+  },
+  "author": "Wishal Devinda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WishalDevinda/Smart-Parking-Management-System/issues"
+  },
+  "homepage": "https://github.com/WishalDevinda/Smart-Parking-Management-System#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.3",
+    "nodemon": "^3.1.10"
+  }
+}
