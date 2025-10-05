@@ -132,6 +132,32 @@ const finishParking = async function (req, res) {
     }
 }
 
+const getAllVehicles = async function (req, res) {
+    try {
+        const vehicles = await vehicle.find().sort({ date: -1});
+        res.status(200).json({
+            message: "Vehicle fetched successfully",
+            vehicle: vehicles,
+            status: "success"
+        })
+
+        if(!vehicles) {
+            return res.status(404).json({
+                message: "No vehicles found",
+                status: "error",
+                vehicle: null
+            })
+        }
+    }
+
+    catch {error} {
+        //display error message
+        res.status(500).json({
+            message: error.message,
+            status: "error"
+        })
+    }
+}
 //export the controller functions
 module.exports = { 
     registerVehicle,
