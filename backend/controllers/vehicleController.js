@@ -161,5 +161,6 @@ const getAllVehicles = async function (req, res) {
 //export the controller functions
 module.exports = { 
     registerVehicle,
-    finishParking
+    finishParking,
+    getAllVehicles
  };
