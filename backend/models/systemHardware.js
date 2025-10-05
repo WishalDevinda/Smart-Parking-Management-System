@@ -7,7 +7,7 @@ const systemHardwareSchema = new schema({
     hardwareID: { //----------------------------------> hardware ID
         type: String,
         require: true,
-        unique : true,
+        unique: true,
         trim: true
     },
 
@@ -30,7 +30,7 @@ const systemHardwareSchema = new schema({
         trim: true,
         default: Date.now
     },
-    
+
     lastMaintanceDate: { //---------------------------> last maintenance date
         type: Date,
         require: false,
@@ -45,7 +45,7 @@ const systemHardwareSchema = new schema({
 })
 
 //convert the schema to a mongoose model
-const SystemHardware = mongoose.model("SystemHardware", systemHardwawreSchema);
+const SystemHardware = mongoose.model("SystemHardware", systemHardwareSchema);
 
 //export the model
 module.exports = SystemHardware;

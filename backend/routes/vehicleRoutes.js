@@ -1,17 +1,26 @@
-//decalring variables to import packeges
+//declaring variables to import packages
 const router = require("express").Router();
-const { registerVehicle, finishParking, getAllVehicles } = require("../controllers/vehicleController");
 
-//creating routes for vehicle
+//import controller functions
+const {
+    registerVehicle,
+    finishParking,
+    getAllVehicles,
+} = require("../controllers/vehicleController");
+
+/* --------------------------- ROUTE DEFINITIONS --------------------------- */
+
+// CREATE → Register a new vehicle (entry)
 router.post("/add", registerVehicle);
-router.put("/finish/:id", finishParking);
-router.get("/getAll", getAllVehicles);
-/*
-router.get("/getAll", controller.getAllVehicles);
-router.get("/get/id:", controller.getVehicleByID);
-router.put("/update/id:", controller.updateVehicle);
-router.delete("/delete/id:", controller.deleteVehicle);
-*/
 
-//export the routers
+// UPDATE → Finish parking by vehicleID (exit)
+// using :vehicleID instead of generic :id for clarity
+router.put("/finish/:vehicleID", finishParking);
+
+// READ → Get all registered vehicles
+router.get("/getAll", getAllVehicles);
+
+/* ------------------------------------------------------------------------- */
+
+//export the router
 module.exports = router;

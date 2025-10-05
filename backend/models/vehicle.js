@@ -4,28 +4,28 @@ const schema = mongoose.Schema;
 
 //create a schema for vehicle collection
 const vehicleSchema = new schema({
-    vehicleID : { //------------------------------> vehicle ID
+    vehicleID: { //------------------------------> vehicle ID
         type: String,
         require: true,
         unique: true,
         trim: true
     },
-    
+
     vehicleNumber: { //---------------------------> vehicle number
         type: String,
         require: true,
         unique: true,
-        trim:  true
+        trim: true
     },
 
     vehicleType: { //-----------------------------> vehicle type
         type: String,
         require: true,
-        trim: true,    
+        trim: true,
     },
 
     date: { //--------------------------------------> date
-        type: Date,
+        type: String,
         require: true,
         trim: true,
         default: Date.now
@@ -63,7 +63,7 @@ const vehicleSchema = new schema({
         default: "Not Assigned",
         ref: "Slot"
     }
-    })
+})
 
 //convert the schema to a mongoose model
 const Vehicle = mongoose.model("Vehicle", vehicleSchema);

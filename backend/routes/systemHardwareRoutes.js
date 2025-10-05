@@ -1,16 +1,34 @@
-//declaring variables to import packeges
+//declaring variables to import packages
 const router = require("express").Router();
-const controller = require("../controllers/systemHardwareController");
 
-/*
-//creating routes for system hardware
-router.post("/add", controller.addSystemHardware);
-router.get("/getAll", controller.getAllSystemHardwares);
-router.get("/get/id:", controller.getSystemHardwareByID);
-router.put("/update/id:", controller.updateSystemHardware);
-router.delete("/delete/id:", controller.deleteSystemHardware);
+//import controller functions
+const {
+    addSystemHardware,
+    getAllSystemHardwares,
+    getSystemHardwareByID,
+    updateSystemHardware,
+    deleteSystemHardware,
+} = require("../controllers/systemHardwareController");
 
-*/
+/* --------------------------- ROUTE DEFINITIONS --------------------------- */
 
-//export the routers
+// CREATE → Add new system hardware
+router.post("/add", addSystemHardware);
+
+// READ → Get all system hardwares
+router.get("/getAll", getAllSystemHardwares);
+
+// READ → Get single system hardware by ID (using param)
+router.get("/get/:hardwareID", getSystemHardwareByID);
+
+// UPDATE → Update system hardware by ID (use PUT or PATCH)
+router.put("/update/:hardwareID", updateSystemHardware);
+router.patch("/update/:hardwareID", updateSystemHardware);
+
+// DELETE → Delete system hardware by ID
+router.delete("/delete/:hardwareID", deleteSystemHardware);
+
+/* ------------------------------------------------------------------------- */
+
+//export the router
 module.exports = router;

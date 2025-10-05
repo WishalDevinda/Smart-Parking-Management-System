@@ -10,7 +10,7 @@ const dotenv = require("dotenv");
 
 const connection = async () => {
     try {
-        await(mongoose.connect(MONGO_URL, {
+        await (mongoose.connect(MONGO_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         }))
@@ -34,9 +34,11 @@ app.use(express.json());
 
 //importing routes
 const vehicleRoutes = require("./routes/vehicleRoutes");
+const systemHardwareRoutes = require("./routes/systemHardwareRoutes");
 
 //use the imported routes
 app.use("/api/vehicles", vehicleRoutes);
+app.use("/api/systemHardwares", systemHardwareRoutes);
 
 //delclaring a variable to assign the port number
 const PORT = process.env.PORT || 5000;
