@@ -1,9 +1,10 @@
 //decalring variables to import packeges
 const router = require("express").Router();
-const { registerVehicle } = require("../controllers/vehicleController");
+const { registerVehicle, finishParking } = require("../controllers/vehicleController");
 
 //creating routes for vehicle
 router.post("/add", registerVehicle);
+router.put("/finish", finishParking);
 
 /*
 router.get("/getAll", controller.getAllVehicles);
