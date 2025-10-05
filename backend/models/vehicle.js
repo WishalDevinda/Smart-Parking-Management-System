@@ -53,6 +53,15 @@ const vehicleSchema = new schema({
         type: String,
         require: true,
         trim: true
+    },
+
+    //Foreign Keys
+    slotID: { //----------------------------------> slot ID
+        type: String,
+        require: false,
+        trim: true,
+        default: "Not Assigned",
+        ref: "Slot"
     }
     })
 

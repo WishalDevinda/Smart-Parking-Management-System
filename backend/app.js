@@ -22,10 +22,6 @@ const connection = async () => {
     }
 }
 
-/*  =====================
-        Import Routes
-    =====================  */
-
 //configure the .env file
 dotenv.config();
 
@@ -35,6 +31,12 @@ const app = express();
 //use middleware for the express app
 app.use(cors());
 app.use(express.json());
+
+//importing routes
+const vehicleRoutes = require("./routes/vehicleRoutes");
+
+//use the imported routes
+app.use("/api/vehicles", vehicleRoutes);
 
 //delclaring a variable to assign the port number
 const PORT = process.env.PORT || 5000;
