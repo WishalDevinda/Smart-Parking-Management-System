@@ -67,7 +67,7 @@ exports.registerVehicle = async (req, res) => {
   }
 };
 
-// PUT /api/vehicles/finish/by-number/:vehicleNumber   (finish using vehicleNumber)
+// PUT /api/vehicles/finish/by-number/:vehicleNumber
 exports.finishParkingByVehicleNumber = async (req, res) => {
   try {
     const vehicleNumber =
@@ -112,6 +112,28 @@ exports.getAllVehicles = async (_req, res) => {
       message: "Vehicles fetched successfully",
       vehicles,
       count: vehicles.length,
+      status: "success",
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message, status: "error" });
+  }
+};
+
+// GET /api/vehicles/history/:vehicleNumber
+exports.getHistoryByVehicleNumber = async (req, res) => {
+  try {
+    const vehicleNumber = (req.params.vehicleNumber || "").trim().toUpperCase();
+    if (!vehicleNumber) {
+      return res.status(400).json({ message: "vehicleNumber is required", status: "error" });
+    }
+    const history = await Vehicle.find({ vehicleNumber })
+      .sort({ date: -1, entryTime: -1 });
+
+    res.json({
+      message: "History fetched successfully",
+      vehicleNumber,
+      count: history.length,
+      history,
       status: "success",
     });
   } catch (err) {

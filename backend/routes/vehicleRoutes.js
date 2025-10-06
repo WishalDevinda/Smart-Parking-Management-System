@@ -4,11 +4,12 @@ const {
   registerVehicle,
   finishParkingByVehicleNumber,
   getAllVehicles,
+  getHistoryByVehicleNumber,
 } = require("../controllers/vehicleController");
 
 router.post("/add", registerVehicle);
-// finish by vehicleNumber (input from exit counter)
 router.put("/finish/by-number/:vehicleNumber", finishParkingByVehicleNumber);
 router.get("/getAll", getAllVehicles);
+router.get("/history/:vehicleNumber", getHistoryByVehicleNumber);
 
 module.exports = router;

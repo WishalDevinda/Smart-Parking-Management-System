@@ -27,10 +27,10 @@ mongoose
 
 /* -------- routes -------- */
 const vehicleRoutes = require("./routes/vehicleRoutes");
-// (keep/remove if you have it) const systemHardwareRoutes = require("./routes/systemHardwareRoutes");
+const systemHardwareRoutes = require("./routes/systemHardwareRoutes");
 
 app.use("/api/vehicles", vehicleRoutes);
-// app.use("/api/systemHardwares", systemHardwareRoutes);
+app.use("/api/systemHardwares", systemHardwareRoutes);
 
 /* -------- health & 404 helpers -------- */
 app.get("/health", (_req, res) => res.json({ ok: true }));

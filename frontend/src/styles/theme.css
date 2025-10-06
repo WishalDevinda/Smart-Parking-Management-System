@@ -1,7 +1,7 @@
 :root{
   --ink:#262525;
   --white:#FFFFFF;
-  --paper:#FFF4E5;
+  --paper:#F7D9A8;
   --panel:#F7D9A8;
   --orange-900:#C16D00;
   --orange-800:#DB7C00;
@@ -14,7 +14,7 @@
 
   /* layout */
   --gap:24px;
-  --sidebarW:300px;
+  --sidebarW:240px;   /* compact width */
   --headerH:64px;
 }
 
@@ -26,10 +26,14 @@ body{
   font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;
   background:var(--paper);
   color:var(--ink);
+  overflow: hidden; /* freeze page scroll; we scroll the content panel only */
 }
 
-/* header */
+/* ===== Header (fixed) ===== */
 .header{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
   min-height:var(--headerH);
   display:flex;align-items:center;justify-content:space-between;
   padding:16px 22px;background:#1F1F1F;color:var(--white);
@@ -42,80 +46,81 @@ body{
 .userRole{font-size:12px;opacity:.8}
 .avatar{width:36px;height:36px;border-radius:50%;background:#555}
 
-/* main layout */
+/* ===== Layout container (pushes around fixed header & sidebar) ===== */
 .layout{
-  display:grid;
-  grid-template-columns: var(--sidebarW) 1fr;
-  gap:var(--gap);
-  padding:var(--gap);
-  align-items:start;
+  position: relative;
+  padding: var(--gap);
+  padding-top: calc(var(--gap) + var(--headerH));           /* below header */
+  padding-left: calc(var(--gap) + var(--sidebarW));         /* right of sidebar */
+  min-height: 100vh;                                        /* full viewport */
 }
 
-/* ── LEFT NAV background fills page height ───────────────────────────── */
-/* The orange background lives on the aside itself and stretches to the
-   full height of the grid row (i.e., the whole page height of this section). */
+/* ===== Sidebar (fixed, non-scrollable) ===== */
 .sidebar{
-  /* fill left/top/bottom like your mockup */
+  position: fixed;
+  top: var(--headerH);    /* sits under header */
+  left: 0;
+  bottom: 0;              /* reaches the bottom of the screen */
+  width: calc(var(--sidebarW) + var(--gap)); /* covers the left gutter space */
   background:var(--orange-800);
   color:#fff;
-  border-radius:0 0 0 0;
-  padding:18px;
-    display:flex;flex-direction:column;
-  /* bleed to page edges on left/top/bottom */
-  margin-left:calc(-1 * var(--gap));
-  margin-top:calc(-1 * var(--gap));
-  margin-bottom:calc(-1 * var(--gap));
-  width:calc(var(--sidebarW) + var(--gap));
-
-  /* <<< THIS makes the orange area reach the bottom of the page >>> */
-  align-self:stretch;         /* height matches the grid row (content column) */
-
-  position:relative;          /* creates a stacking context */
+  padding:14px;
+  overflow: visible;       /* no scrolling */
 }
 
-/* Inner container is sticky and scrollable (nav has its own scrollbar) */
 .sidebarInner{
-  position:sticky;
-  top:0;                                   /* sticks under the header area */
-  max-height:100vh;                        /* viewport height for the inner scroller */
-  overflow-y:auto;
-  overscroll-behavior:contain;
+  position: static;       /* no sticky/scroll behavior needed now */
+  max-height:none;
+  overflow: visible;
 }
 
-.sidebar h2{margin:0 0 16px 0;font-size:28px;line-height:1.1}
+.sidebar h2{
+  margin:10px 0 20px 0;
+  font-size:28px;
+  line-height:1.15;
+  letter-spacing:.2px;
+}
 .sideBtn{
-  display:block;width:100%;text-align:left;margin:12px 0;padding:12px 14px;
-  background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.2);
-  border-radius:14px;color:#fff;font-weight:600;cursor:pointer
+  display:block;width:100%;
+  text-align:left;
+  margin:8px 0;
+  padding:10px 12px;
+  background:rgba(255,255,255,.15);
+  border:2px solid rgba(255,255,255,.2);
+  border-radius:12px;
+  color:#fff;font-weight:600;font-size:14px;
+  cursor:pointer;
 }
-/* thin scrollbar only for the inner scroller */
-.sidebarInner::-webkit-scrollbar{width:10px}
-.sidebarInner::-webkit-scrollbar-track{background:rgba(0,0,0,.15);border-radius:999px}
-.sidebarInner::-webkit-scrollbar-thumb{background:rgba(255,255,255,.55);border-radius:999px}
 
-/* content column (page scrolls normally) */
+/* ===== Content panel (scrollable) ===== */
 .content{
   background:var(--panel);
-  border-radius:22px;
+  border-radius:0px;
   padding:24px;
+
+  /* make this the only scroll container for the page body */
+  height: calc(100vh - var(--headerH) - (var(--gap) * 2));
+  overflow-y: auto;
 }
+
+/* widgets */
 .card{
   background:var(--card);border-radius:20px;padding:22px;border:3px solid #00000010;
 }
-.pills{display:flex;gap:18px;margin-bottom:18px}
+.pills{display:flex;gap:12px;margin-bottom:18px}
 .pill{
-  padding:14px 26px;border-radius:40px;font-weight:800;
+  padding:12px 22px;border-radius:40px;font-weight:800;
   border:3px solid #000; background:var(--amber-600); cursor:pointer;
 }
 .pill.dark{background:var(--pill);color:#fff}
 .pill.active{box-shadow:0 0 0 6px var(--ring)}
-.field{margin:14px 0}
+.field{margin:12px 0}
 .label{font-weight:800;color:var(--muted);margin-bottom:6px}
 .input, .select{
   width:100%;padding:12px 14px;border-radius:14px;border:3px solid #00000020;
   outline:none;font-size:16px;background:#fff;
 }
-.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .btn{
   background:var(--amber-600);border:none;border-radius:24px;padding:12px 22px;
   font-weight:800;cursor:pointer;box-shadow:0 3px 0 var(--orange-900);
@@ -130,7 +135,8 @@ body{
 .ok{background:#d4edda}
 .err{background:#fde2e1}
 .searchBar{
-  display:grid;grid-template-columns:260px 1fr 56px;gap:10px;align-items:center;
+  display:grid;grid-template-columns:220px 1fr 56px;
+  gap:10px;align-items:center;
   background:var(--pill);color:#fff;border-radius:14px;padding:10px;
 }
 .result{
@@ -145,51 +151,101 @@ body{
   padding:12px 18px;display:flex;align-items:center;justify-content:space-between;
 }
 
-/* --------- Parking Summary styles --------- */
+/* --------- Parking Summary --------- */
 .summaryBox{
   margin-top:18px;background:#fff;border:8px solid #1F1F1F;border-radius:24px;
   padding:20px 22px;
 }
-.summaryTitle{
-  font-size:28px;font-weight:900;color:#3b2b21;margin-bottom:8px;
-}
+.summaryTitle{font-size:26px;font-weight:900;color:#3b2b21;margin-bottom:8px}
 .summaryRows{padding:4px 6px}
 .summaryRow{
-  display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:center;
+  display:grid;grid-template-columns:160px 1fr;gap:12px;align-items:center;
   padding:8px 0;
 }
-.summaryKey{font-weight:900;color:var(--amber-600);font-size:18px}
+.summaryKey{font-weight:900;color:var(--amber-600);font-size:16px}
 .summaryVal{font-weight:600}
 
-/* responsive */
-@media (max-width: 900px){
-  :root{ --sidebarW: 240px; }
-  .summaryRow{grid-template-columns:140px 1fr}
+/* --------- Tables (Vehicles & sticky header) --------- */
+.tableWrap{ max-height:none; overflow:visible; } /* let content panel scroll, not the inner table */
+.tableFix{ width:100%; border-collapse:collapse; font-size:14px; }
+.tableFix th, .tableFix td{ padding:8px 10px; border-bottom:1px dashed #00000020; text-align:left; }
+.tableFix thead th{ position:sticky; top:0; background:#FFF; z-index:1; }
+
+/* responsive tweaks */
+@media (max-width: 1100px){
+  :root{ --sidebarW: 220px; }
 }
 @media (max-width: 700px){
-  .layout{grid-template-columns:1fr}
+  /* On very small screens, fall back to normal flow */
+  body{ overflow:auto; }
   .sidebar{
-    margin:0; width:100%;
+    position: static; width: 100%; height: auto; margin-bottom: var(--gap);
     border-radius:18px;
-    align-self:auto;        /* normal flow on small screens */
   }
-  .sidebarInner{
-    position:static;
-    max-height:none;
-    overflow:visible;
+  .layout{
+    padding-left: var(--gap);
+    padding-top: calc(var(--gap) + var(--headerH));
+  }
+  .content{
+    height: auto;
+    max-height: none;
+    overflow: visible;
   }
 }
-/* Force the grid to be at least the viewport height (minus its own top/bottom padding) */
-.layout{
-  min-height: calc(100vh - (var(--gap) * 2));
+/* ========== Hardware Dashboard ========== */
+.hwTitle{
+  font-size: 34px;
+  font-weight: 900;
+  color: #23201b;
+  margin: 0 0 10px 0;
+}
+.hwPanel{ background: #fdf4e6; border-radius: 22px; padding: 18px; border: 3px solid #00000010; }
+.slotGrid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:16px; }
+.slotCard{
+  background:#fff; border-radius:20px; padding:16px; border:2px solid #00000010; cursor:pointer;
+  transition: transform .05s ease, box-shadow .05s ease;
+}
+.slotCard:hover{ transform: translateY(-1px); box-shadow:0 4px 10px #00000012; }
+.slotName{ font-weight:900; text-align:center; margin:4px 0 10px; font-size:20px; }
+.slotImg{ height:110px; display:flex; align-items:center; justify-content:center; font-size:46px; }
+.slotMeta{ background:#F7D9A8; border-radius:16px; padding:10px 12px; margin-top:8px; }
+.kv{ font-weight:700; }
+.kv .v{ font-weight:800; color:#1a73e8; }
+.status.active{ color:#0a9d2a; }
+.status.inactive{ color:#b91c1c; }
+
+/* Pills variants */
+.pill.danger{ background:#dc2626; color:#fff; }
+
+/* ===== Sidebar hover popup effect ===== */
+.sideBtn{
+  position: relative;
+  transform-origin: left center;     /* grow toward the page */
+  transition:
+    transform 140ms cubic-bezier(.2,.9,.2,1),
+    box-shadow 140ms ease,
+    background-color 140ms ease,
+    border-color 140ms ease;
+  will-change: transform;
 }
 
-/* Ensure the orange sidebar is at least viewport height too */
-.sidebar{
-  min-height: calc(100vh - (var(--gap) * 2));
+.sideBtn:hover,
+.sideBtn:focus-visible{
+  transform: scale(1.04);            /* popup size */
+  background: rgba(255,255,255,.22);
+  border-color: rgba(255,255,255,.35);
+  box-shadow: 0 8px 18px rgba(0,0,0,.18);
+  outline: none;
+  z-index: 2;                         /* ensure it floats above neighbors */
 }
 
-/* Keep the inner sticky scroller sized to that height */
-.sidebarInner{
-  max-height: calc(100vh - (var(--gap) * 2));
+.sideBtn:active{
+  transform: scale(1.04);             /* slight press-in */
+  box-shadow: 0 4px 10px rgba(0,0,0,.18) inset;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce){
+  .sideBtn{ transition: background-color 120ms ease, border-color 120ms ease; }
+  .sideBtn:hover, .sideBtn:focus-visible, .sideBtn:active{ transform:none; box-shadow:none; }
 }

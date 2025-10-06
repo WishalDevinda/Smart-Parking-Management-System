@@ -1,13 +1,14 @@
-export default function SidebarNav() {
+export default function SidebarNav({ onSelectTab }) {
+  const go = (tab) => onSelectTab && onSelectTab(tab);
+
   const items = [
-    "Entry and Exit Management",
-    "Hardware Management",
-    "Finance Management",
-    "Employee Management",
-    "Security Management",
-    "Slot Management",
-    "Reservation Management",
-    // add more as needed
+    { label: "Entry and Exit Management", onClick: () => go("entry") },
+    { label: "Hardware Management", onClick: () => go("hardware") }, // <-- NEW
+    { label: "Finance Management" },
+    { label: "Employee Management" },
+    { label: "Security Management" },
+    { label: "Slot Management" },
+    { label: "Reservation Management" },
   ];
 
   return (
@@ -21,9 +22,9 @@ export default function SidebarNav() {
           System
         </h2>
 
-        {items.map((t, i) => (
-          <button key={i} className="sideBtn">
-            {t}
+        {items.map((it, i) => (
+          <button key={i} className="sideBtn" onClick={it.onClick}>
+            {it.label}
           </button>
         ))}
       </div>

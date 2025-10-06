@@ -1,51 +1,63 @@
-//declaring variables to import packeges
+// backend/models/systemHardware.js
 const mongoose = require("mongoose");
-const schema = mongoose.Schema;
+const { Schema } = mongoose;
 
-//create a schema for system hardware
-const systemHardwareSchema = new schema({
-    hardwareID: { //----------------------------------> hardware ID
-        type: String,
-        require: true,
-        unique: true,
-        trim: true
+// System Hardware schema
+const systemHardwareSchema = new Schema(
+  {
+    hardwareID: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
     },
 
-    hardwareName: { //--------------------------------> hardware name
-        type: String,
-        require: true,
-        unique: false,
-        trim: true
+    hardwareName: {
+      type: String,
+      required: true,
+      trim: true,
     },
 
-    hardwareType: { //--------------------------------> hardware type
-        type: String,
-        require: true,
-        trim: true
+    hardwareType: {
+      type: String,
+      required: true,
+      trim: true,
     },
 
-    implementedDate: { //-------------------------------> implemented date
-        type: Date,
-        require: true,
-        trim: true,
-        default: Date.now
+    // Correct field name
+    implementedDate: {
+      type: Date,
+      required: true,
+      default: Date.now,
+      trim: true,
     },
 
-    lastMaintanceDate: { //---------------------------> last maintenance date
-        type: Date,
-        require: false,
-        trim: true
+    // Correct field name
+    lastMaintenanceDate: {
+      type: Date,
+      required: false,
+      default: null,
+      trim: true,
     },
 
-    hardwareStatus: { //-----------------------------> hardware status
-        type: String,
-        require: true,
-        trtim: true
-    }
-})
+    hardwareStatus: {
+      type: String,
+      required: true,
+      trim: true,
+      default: "Active",
+    },
 
-//convert the schema to a mongoose model
-const SystemHardware = mongoose.model("SystemHardware", systemHardwareSchema);
+    // NOTE: temporary legacy field so existing documents still deserialize cleanly.
+    // You may drop this from the schema after migrating data.
+    lastMaintanceDate: {
+      type: Date,
+      required: false,
+      default: null,
+      trim: true,
+      select: true,
+    },
+  },
+  { versionKey: false }
+);
 
-//export the model
-module.exports = SystemHardware;
+module.exports = mongoose.model("SystemHardware", systemHardwareSchema);
