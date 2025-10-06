@@ -1,58 +1,46 @@
-//declaring variables to import packages
-const mongoose = require("mongoose");
-const cors = require("cors");
+// app.js
+require("dotenv").config();
+
 const express = require("express");
-const dotenv = require("dotenv");
+const cors = require("cors");
+const mongoose = require("mongoose");
 
-/*  ==================================
-        declaring helper functions
-    ==================================  */
-
-const connection = async () => {
-    try {
-        await (mongoose.connect(MONGO_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }))
-        console.log("MongoDB connected successfully");
-    }
-    catch (error) {
-        console.log("MongoDB connection failed");
-        console.log(error); //display the error message
-    }
-}
-
-//configure the .env file
-dotenv.config();
-
-//create an express app
 const app = express();
 
-//use middleware for the express app
+/* -------- middleware -------- */
 app.use(cors());
 app.use(express.json());
 
-//importing routes
-const vehicleRoutes = require("./routes/vehicleRoutes");
-const systemHardwareRoutes = require("./routes/systemHardwareRoutes");
-
-//use the imported routes
-app.use("/api/vehicles", vehicleRoutes);
-app.use("/api/systemHardwares", systemHardwareRoutes);
-
-//delclaring a variable to assign the port number
-const PORT = process.env.PORT || 5000;
-
-//getting the mongodb connection string from the .env file
+/* -------- db -------- */
 const MONGO_URL = process.env.MONGO_URL;
+if (!MONGO_URL) {
+  console.error("❌ Missing MONGO_URL in .env");
+  process.exit(1);
+}
+mongoose
+  .connect(MONGO_URL)
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((e) => {
+    console.error("❌ MongoDB error", e.message);
+    process.exit(1);
+  });
 
-//connect to the database
-connection();
+/* -------- routes -------- */
+const vehicleRoutes = require("./routes/vehicleRoutes");
+// (keep/remove if you have it) const systemHardwareRoutes = require("./routes/systemHardwareRoutes");
 
-//start listing to the defined port
-app.listen(PORT, () => {
-    console.log("Server is running on port " + PORT);
-})
+app.use("/api/vehicles", vehicleRoutes);
+// app.use("/api/systemHardwares", systemHardwareRoutes);
 
-//export the express app
+/* -------- health & 404 helpers -------- */
+app.get("/health", (_req, res) => res.json({ ok: true }));
+app.use((req, res) => {
+  // Helpful 404 body so you see what path was missed
+  res.status(404).json({ message: "Not Found", method: req.method, path: req.originalUrl });
+});
+
+/* -------- start -------- */
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 API listening on http://localhost:${PORT}`));
+
 module.exports = app;

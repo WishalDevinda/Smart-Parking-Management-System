@@ -1,0 +1,195 @@
+:root{
+  --ink:#262525;
+  --white:#FFFFFF;
+  --paper:#FFF4E5;
+  --panel:#F7D9A8;
+  --orange-900:#C16D00;
+  --orange-800:#DB7C00;
+  --amber-600:#F1A100;
+  --amber-300:#F1C28C;
+  --ring:#F1A10033;
+  --pill:#1F1F1F;
+  --muted:#7B5E39;
+  --card:#FFE7BF;
+
+  /* layout */
+  --gap:24px;
+  --sidebarW:300px;
+  --headerH:64px;
+}
+
+/* base */
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;
+  background:var(--paper);
+  color:var(--ink);
+}
+
+/* header */
+.header{
+  min-height:var(--headerH);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 22px;background:#1F1F1F;color:var(--white);
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brandTitle{font-size:22px;font-weight:700}
+.brandSub{font-size:12px;opacity:.8;letter-spacing:.7px}
+.userCard{display:flex;align-items:flex-end;gap:10px}
+.userName{font-weight:600}
+.userRole{font-size:12px;opacity:.8}
+.avatar{width:36px;height:36px;border-radius:50%;background:#555}
+
+/* main layout */
+.layout{
+  display:grid;
+  grid-template-columns: var(--sidebarW) 1fr;
+  gap:var(--gap);
+  padding:var(--gap);
+  align-items:start;
+}
+
+/* ── LEFT NAV background fills page height ───────────────────────────── */
+/* The orange background lives on the aside itself and stretches to the
+   full height of the grid row (i.e., the whole page height of this section). */
+.sidebar{
+  /* fill left/top/bottom like your mockup */
+  background:var(--orange-800);
+  color:#fff;
+  border-radius:0 0 0 0;
+  padding:18px;
+    display:flex;flex-direction:column;
+  /* bleed to page edges on left/top/bottom */
+  margin-left:calc(-1 * var(--gap));
+  margin-top:calc(-1 * var(--gap));
+  margin-bottom:calc(-1 * var(--gap));
+  width:calc(var(--sidebarW) + var(--gap));
+
+  /* <<< THIS makes the orange area reach the bottom of the page >>> */
+  align-self:stretch;         /* height matches the grid row (content column) */
+
+  position:relative;          /* creates a stacking context */
+}
+
+/* Inner container is sticky and scrollable (nav has its own scrollbar) */
+.sidebarInner{
+  position:sticky;
+  top:0;                                   /* sticks under the header area */
+  max-height:100vh;                        /* viewport height for the inner scroller */
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+
+.sidebar h2{margin:0 0 16px 0;font-size:28px;line-height:1.1}
+.sideBtn{
+  display:block;width:100%;text-align:left;margin:12px 0;padding:12px 14px;
+  background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.2);
+  border-radius:14px;color:#fff;font-weight:600;cursor:pointer
+}
+/* thin scrollbar only for the inner scroller */
+.sidebarInner::-webkit-scrollbar{width:10px}
+.sidebarInner::-webkit-scrollbar-track{background:rgba(0,0,0,.15);border-radius:999px}
+.sidebarInner::-webkit-scrollbar-thumb{background:rgba(255,255,255,.55);border-radius:999px}
+
+/* content column (page scrolls normally) */
+.content{
+  background:var(--panel);
+  border-radius:22px;
+  padding:24px;
+}
+.card{
+  background:var(--card);border-radius:20px;padding:22px;border:3px solid #00000010;
+}
+.pills{display:flex;gap:18px;margin-bottom:18px}
+.pill{
+  padding:14px 26px;border-radius:40px;font-weight:800;
+  border:3px solid #000; background:var(--amber-600); cursor:pointer;
+}
+.pill.dark{background:var(--pill);color:#fff}
+.pill.active{box-shadow:0 0 0 6px var(--ring)}
+.field{margin:14px 0}
+.label{font-weight:800;color:var(--muted);margin-bottom:6px}
+.input, .select{
+  width:100%;padding:12px 14px;border-radius:14px;border:3px solid #00000020;
+  outline:none;font-size:16px;background:#fff;
+}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.btn{
+  background:var(--amber-600);border:none;border-radius:24px;padding:12px 22px;
+  font-weight:800;cursor:pointer;box-shadow:0 3px 0 var(--orange-900);
+}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.btnXL{padding:14px 40px;font-size:20px;border-radius:30px}
+.center{display:flex;justify-content:center;margin-top:18px}
+
+.toast{
+  margin-top:12px;padding:10px 12px;border-radius:10px;font-size:14px;font-weight:600;
+}
+.ok{background:#d4edda}
+.err{background:#fde2e1}
+.searchBar{
+  display:grid;grid-template-columns:260px 1fr 56px;gap:10px;align-items:center;
+  background:var(--pill);color:#fff;border-radius:14px;padding:10px;
+}
+.result{
+  margin-top:12px;background:#fff;border-radius:16px;padding:14px;border:2px dashed #00000020;
+  max-height:220px;overflow:auto;
+}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#000;color:#fff;font-weight:700}
+.small{font-size:12px;opacity:.8}
+
+.footer{
+  margin-top:24px;background:#1F1F1F;color:#fff;border-radius:16px;
+  padding:12px 18px;display:flex;align-items:center;justify-content:space-between;
+}
+
+/* --------- Parking Summary styles --------- */
+.summaryBox{
+  margin-top:18px;background:#fff;border:8px solid #1F1F1F;border-radius:24px;
+  padding:20px 22px;
+}
+.summaryTitle{
+  font-size:28px;font-weight:900;color:#3b2b21;margin-bottom:8px;
+}
+.summaryRows{padding:4px 6px}
+.summaryRow{
+  display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:center;
+  padding:8px 0;
+}
+.summaryKey{font-weight:900;color:var(--amber-600);font-size:18px}
+.summaryVal{font-weight:600}
+
+/* responsive */
+@media (max-width: 900px){
+  :root{ --sidebarW: 240px; }
+  .summaryRow{grid-template-columns:140px 1fr}
+}
+@media (max-width: 700px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{
+    margin:0; width:100%;
+    border-radius:18px;
+    align-self:auto;        /* normal flow on small screens */
+  }
+  .sidebarInner{
+    position:static;
+    max-height:none;
+    overflow:visible;
+  }
+}
+/* Force the grid to be at least the viewport height (minus its own top/bottom padding) */
+.layout{
+  min-height: calc(100vh - (var(--gap) * 2));
+}
+
+/* Ensure the orange sidebar is at least viewport height too */
+.sidebar{
+  min-height: calc(100vh - (var(--gap) * 2));
+}
+
+/* Keep the inner sticky scroller sized to that height */
+.sidebarInner{
+  max-height: calc(100vh - (var(--gap) * 2));
+}

@@ -1,72 +1,36 @@
-//declaring variables to import packeges
+// models/vehicle.js
 const mongoose = require("mongoose");
-const schema = mongoose.Schema;
+const { Schema } = mongoose;
 
-//create a schema for vehicle collection
-const vehicleSchema = new schema({
-    vehicleID: { //------------------------------> vehicle ID
-        type: String,
-        require: true,
-        unique: true,
-        trim: true
+// Store times as strings ("HH:MM:SS") to match your controller.
+// Also fix `required` (it was written as `require` before).
+const vehicleSchema = new Schema(
+  {
+    vehicleID: { type: String, required: true, unique: true, trim: true },
+    vehicleNumber: { type: String, required: true, unique: true, trim: true },
+    vehicleType: { type: String, required: true, trim: true },
+
+    // YYYY-MM-DD
+    date: { type: String, required: true, trim: true },
+
+    // Times as "HH:MM:SS" strings
+    entryTime: { type: String, required: true, trim: true },
+    exitTime: { type: String, default: null, trim: true },
+
+    // Minutes
+    duration: { type: Number, default: null },
+
+    reservationType: { type: String, required: true, trim: true },
+
+    // Optional
+    slotID: {
+      type: String,
+      default: "Not Assigned",
+      trim: true,
+      ref: "Slot",
     },
+  },
+  { versionKey: false }
+);
 
-    vehicleNumber: { //---------------------------> vehicle number
-        type: String,
-        require: true,
-        unique: true,
-        trim: true
-    },
-
-    vehicleType: { //-----------------------------> vehicle type
-        type: String,
-        require: true,
-        trim: true,
-    },
-
-    date: { //--------------------------------------> date
-        type: String,
-        require: true,
-        trim: true,
-        default: Date.now
-    },
-
-    entryTime: { //----------------------------------> entry time
-        type: Date,
-        require: true,
-        trim: true,
-    },
-
-    exitTime: { //-----------------------------------> exit time
-        type: Date,
-        require: false,
-        trim: true
-    },
-
-    duration: { //------------------------------------> duration
-        type: Number,
-        require: false,
-        trim: true
-    },
-
-    reservationType: { //---------------------------> reservation type
-        type: String,
-        require: true,
-        trim: true
-    },
-
-    //Foreign Keys
-    slotID: { //----------------------------------> slot ID
-        type: String,
-        require: false,
-        trim: true,
-        default: "Not Assigned",
-        ref: "Slot"
-    }
-})
-
-//convert the schema to a mongoose model
-const Vehicle = mongoose.model("Vehicle", vehicleSchema);
-
-//export the model
-module.export = Vehicle;
+module.exports = mongoose.model("Vehicle", vehicleSchema);
