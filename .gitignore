@@ -1,28 +1,87 @@
-# Dependencies
-node_modules/
-frontend/node_modules/
-backend/node_modules/
-
-# Environment
-.env
-.env.*
-
-# Build outputs
-/dist/
-/build/
-/.cache/
-/.parcel-cache/
-
 # Logs
+logs/
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-logs/
+lerna-debug.log*
 
-# OS/editor
+# Diagnostic reports
+report.*.json
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+*.lcov
+.nyc_output/
+
+# Build outputs
+build/
+build/Release/
+dist/
+.out/
+.next/
+.nuxt/
+out/
+.cache/
+.parcel-cache/
+
+# Dependency directories
+node_modules/
+jspm_packages/
+web_modules/
+
+# Package manager caches
+.npm/
+.yarn/*
+.pnp.*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# TypeScript
+*.tsbuildinfo
+
+# Linters
+.eslintcache
+.stylelintcache
+
+# REPL history
+.node_repl_history
+
+# Archives
+*.tgz
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Framework caches
+.vuepress/dist
+.temp/
+.svelte-kit/
+**/.vitepress/dist
+**/.vitepress/cache
+.docusaurus/
+.serverless/
+.fusebox/
+.dynamodb/
+.firebase/
+
+# Editors/OS
+.vscode/
+.vscode-test/
 .DS_Store
 Thumbs.db
-.vscode/
 
-# Misc
-coverage/
+# Vite timestamps
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
