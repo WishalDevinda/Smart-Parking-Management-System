@@ -1,0 +1,25 @@
+:root{
+  --header:#b56400; /* do not change header */
+  --bg:#f6dcab; /* do not change background */
+  --accent:#f0b243; /* orange buttons */
+  --olive:#838067; /* olive blocks/buttons */
+  --red:#e50f1b; /* checkout */
+  --green:#b1c44b; /* checkin */
+  --yellow:#f3cf26; /* maintenance */
+}
+body{background:var(--bg);font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;color:#2a2a2a}
+.header{background:var(--header);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:24px}
+.header .tabs a{color:#fff;text-decoration:none;margin-right:16px;padding:6px 12px;border-radius:16px;background:rgba(255,255,255,0.2)}
+.page{padding:24px;max-width:1100px;margin:0 auto}
+.card{background:#837e65;color:#fff;padding:12px;border-radius:4px}
+.btn{border:none;border-radius:8px;padding:10px 12px;cursor:pointer}
+.btn.accent{background:var(--accent)}
+.btn.olive{background:var(--olive);color:#fff}
+.btn.red{background:var(--red);color:#fff}
+.btn.green{background:var(--green)}
+.btn.yellow{background:var(--yellow)}
+input,select{padding:10px;border-radius:8px;border:1px solid #ccc}
+.grid{display:grid;gap:16px}
+.grid.cols-2{grid-template-columns:1fr 1fr}
+.grid.cols-4{grid-template-columns:repeat(4,1fr)}
+.slot-tile{background:var(--olive);color:#fff;padding:20px;text-align:center;border-radius:6px}
