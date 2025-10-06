@@ -4,8 +4,8 @@ import axios from "axios";
 /**
  * Infer API base:
  * - REACT_APP_API_BASE wins (e.g. http://localhost:5000)
- * - If running CRA on port 3000, default to :5000 same host
- * - Otherwise use relative '' (assumes proxy in package.json)
+ * - If running CRA/Vite dev on port 3000/5173, default to same host :5000
+ * - Otherwise fallback to relative '' (assumes a proxy is configured)
  */
 function inferBase() {
   const env = (process.env.REACT_APP_API_BASE || "").trim();
@@ -13,9 +13,11 @@ function inferBase() {
 
   if (typeof window !== "undefined") {
     const { protocol, hostname, port } = window.location;
-    if (port === "3000") {
+    if (port === "3000" || port === "5173") {
       return `${protocol}//${hostname}:5000`;
     }
+    // relative base (proxy in dev or same origin in prod)
+    return "";
   }
   return "";
 }
@@ -23,106 +25,48 @@ function inferBase() {
 const http = axios.create({
   baseURL: inferBase(),
   headers: { "Content-Type": "application/json" },
+  // you can add withCredentials: true if you use cookies
 });
 
-const normalizeList = (data) => {
-  if (!data) return [];
-  if (Array.isArray(data)) return data;
-  if (Array.isArray(data.vehicles)) return data.vehicles;
-  if (Array.isArray(data.vehicle)) return data.vehicle;
-  return [];
-};
-
-// Fallback helpers: try multiple endpoints if the first returns 404
-async function postWithFallback(paths, payload) {
-  let lastErr;
-  for (const p of paths) {
-    try {
-      return await http.post(p, payload);
-    } catch (e) {
-      if (e?.response?.status === 404) {
-        lastErr = e;
-        continue; // try next path
-      }
-      throw e;
-    }
-  }
-  throw lastErr || new Error("All POST paths failed");
-}
-async function getWithFallback(paths) {
-  let lastErr;
-  for (const p of paths) {
-    try {
-      return await http.get(p);
-    } catch (e) {
-      if (e?.response?.status === 404) {
-        lastErr = e;
-        continue;
-      }
-      throw e;
-    }
-  }
-  throw lastErr || new Error("All GET paths failed");
-}
-
+/* ---------------------------------------
+   API surface
+---------------------------------------- */
 const api = {
+  /* -------- Vehicles -------- */
   vehicles: {
+    // Entry: register a vehicle
     register: (payload) => http.post("/api/vehicles/add", payload),
 
-    async finishByNumber(vehicleNumber) {
-      const res = await http.get("/api/vehicles/getAll");
-      const list = normalizeList(res.data);
-      const match = list.find(
-        (v) =>
-          String(v.vehicleNumber).toUpperCase() ===
-          String(vehicleNumber).toUpperCase()
-      );
-      if (!match || !match.vehicleID) {
-        const err = new Error("Vehicle not found for finish");
-        err.response = { data: { message: "Vehicle not found for finish" } };
-        throw err;
-      }
-      return http.put(`/api/vehicles/finish/${encodeURIComponent(match.vehicleID)}`);
-    },
+    // Exit: finish by vehicle number (FIXED: correct method + path)
+    finishByNumber: (vehicleNumber) =>
+      http.put(
+        `/api/vehicles/finish/by-number/${encodeURIComponent(vehicleNumber)}`
+      ),
 
+    // List all vehicles
     getAll: () => http.get("/api/vehicles/getAll"),
   },
 
+  /* -------- System Hardware -------- */
   systemHardware: {
-    async getAll() {
-      return getWithFallback([
-        "/api/systemHardwares/getAll",
-        "/api/systemHardwares",
-        "/api/systemHardware/getAll",
-        "/api/systemHardware",
-      ]);
-    },
+    // List
+    getAll: () => http.get("/api/systemHardwares/getAll"),
 
-    getById: (id) =>
-      http.get(`/api/systemHardwares/get/${encodeURIComponent(id)}`),
+    // Add
+    add: (payload) => http.post("/api/systemHardwares/add", payload),
 
-    // ✅ Robust add with path fallbacks
-    add: (payload) =>
-      postWithFallback(
-        [
-          "/api/systemHardwares/add",
-          "/api/systemHardware/add",
-          "/api/systemHardwares",
-          "/api/systemHardware",
-        ],
-        payload
-      ),
-
+    // Update by id
     update: (id, payload) =>
       http.put(`/api/systemHardwares/update/${encodeURIComponent(id)}`, payload),
 
+    // Delete by id
     delete: (id) =>
       http.delete(`/api/systemHardwares/delete/${encodeURIComponent(id)}`),
   },
 
+  /* -------- Online Bookings (if used elsewhere) -------- */
   onlineBookings: {
-    getById: (id) =>
-      http.get(`/api/onlinebookings/get/${encodeURIComponent(id)}`),
+    getById: (id) => http.get(`/api/onlinebookings/get/${encodeURIComponent(id)}`),
   },
 };
 
