@@ -1,0 +1,51 @@
+SMART PARKING MANAGEMENT SYSTEM - RESERVATION REPORT
+============================================================
+
+Generated on: 10/1/2025, 11:46:55 PM
+
+1. Reservation ID: RES1759261833913D1NAW
+   Driver: N/A (N/A)
+   Contact: 0764413334
+   Vehicle: ABC-1234 (Van)
+   Parking Slot: A001 - Ground Floor - Section A
+   Reserved Date: 10/1/2025
+   Entry Time: 9/30/2025, 1:20:00 AM
+   Exit Time: 9/30/2025, 1:20:00 PM
+   Status: active
+--------------------------------------------------
+
+2. Reservation ID: RES1759262148170NMG5E
+   Driver: N/A (N/A)
+   Contact: 0764413334
+   Vehicle: ABC-1234 (Jeep)
+   Parking Slot: B105 - Second Floor - Section B
+   Reserved Date: 10/1/2025
+   Entry Time: 9/30/2025, 1:25:00 AM
+   Exit Time: 9/30/2025, 1:25:00 PM
+   Status: active
+--------------------------------------------------
+
+3. Reservation ID: RES17593134192435KI6Z
+   Driver: sadhushan (sadhushan@gmail.com)
+   Contact: 0774502188
+   Vehicle: CAW-6275 (Car)
+   Parking Slot: B101 - Second Floor - Section B
+   Reserved Date: 10/1/2025
+   Entry Time: 10/1/2025, 10:00:00 AM
+   Exit Time: 10/1/2025, 2:00:00 PM
+   Status: active
+--------------------------------------------------
+
+4. Reservation ID: RES175931362218106QF2
+   Driver: sivakumar (sivakumar@gmail.com)
+   Contact: 0767229006
+   Vehicle: BJW-4091 (Moter-Bicycle)
+   Parking Slot: B103 - Second Floor - Section B
+   Reserved Date: 10/1/2025
+   Entry Time: 10/1/2025, 9:00:00 AM
+   Exit Time: 10/1/2025, 10:00:00 AM
+   Status: active
+--------------------------------------------------
+
+
+Total Reservations: 4

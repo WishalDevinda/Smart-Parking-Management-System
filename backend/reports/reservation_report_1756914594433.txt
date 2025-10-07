@@ -1,0 +1,61 @@
+SMART PARKING MANAGEMENT SYSTEM - RESERVATION REPORT
+============================================================
+
+Generated on: 9/3/2025, 9:19:54 PM
+
+1. Reservation ID: RES1756832068164HIM7D
+   Driver: Charlie Wilson (charlie.wilson@email.com)
+   Parking Slot: A105 - Second Floor - Section A
+   Reserved Date: 9/2/2025
+   Entry Time: 9/1/2025, 11:26:00 PM
+   Exit Time: 9/2/2025, 11:24:00 AM
+   Status: cancelled
+--------------------------------------------------
+
+2. Reservation ID: RES1756902850976WIEUC
+   Driver: RANDIM (qwer@gmail.com)
+   Parking Slot: A004 - Ground Floor - Section A
+   Reserved Date: 9/3/2025
+   Entry Time: 9/3/2025, 6:04:00 AM
+   Exit Time: 9/3/2025, 6:04:00 PM
+   Status: active
+--------------------------------------------------
+
+3. Reservation ID: RES1756903011311DSTBA
+   Driver: RANDIM (qwer@gmail.com)
+   Parking Slot: B004 - Ground Floor - Section B
+   Reserved Date: 9/3/2025
+   Entry Time: 9/21/2025, 12:36:00 AM
+   Exit Time: 9/21/2025, 12:40:00 PM
+   Status: cancelled
+--------------------------------------------------
+
+4. Reservation ID: RES1756903028325EW5Q3
+   Driver: RANDIM (qwer@gmail.com)
+   Parking Slot: A101 - Second Floor - Section A
+   Reserved Date: 9/3/2025
+   Entry Time: 9/3/2025, 10:06:00 AM
+   Exit Time: 9/3/2025, 6:07:00 PM
+   Status: active
+--------------------------------------------------
+
+5. Reservation ID: RES17569139863699PTJ6
+   Driver: RANDIM (qwer@gmail.com)
+   Parking Slot: B002 - Ground Floor - Section B
+   Reserved Date: 9/3/2025
+   Entry Time: 9/22/2025, 11:09:00 AM
+   Exit Time: 9/22/2025, 9:11:00 PM
+   Status: active
+--------------------------------------------------
+
+6. Reservation ID: RES1756914468562ZS120
+   Driver: RANDIM (qwer@gmail.com)
+   Parking Slot: B001 - Ground Floor - Section B
+   Reserved Date: 9/3/2025
+   Entry Time: 9/16/2025, 9:17:00 AM
+   Exit Time: 9/16/2025, 11:17:00 PM
+   Status: active
+--------------------------------------------------
+
+
+Total Reservations: 6

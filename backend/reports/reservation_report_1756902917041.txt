@@ -1,0 +1,34 @@
+SMART PARKING MANAGEMENT SYSTEM - RESERVATION REPORT
+============================================================
+
+Generated on: 9/3/2025, 6:05:17 PM
+
+1. Reservation ID: RES1756832068164HIM7D
+   Driver: Charlie Wilson (charlie.wilson@email.com)
+   Parking Slot: A105 - Second Floor - Section A
+   Reserved Date: 9/2/2025
+   Entry Time: 9/2/2025, 10:26:00 AM
+   Exit Time: 9/2/2025, 10:24:00 PM
+   Status: active
+--------------------------------------------------
+
+2. Reservation ID: RES1756859684409XIM4W
+   Driver: Charlie Wilson (charlie.wilson@email.com)
+   Parking Slot: B101 - Second Floor - Section B
+   Reserved Date: 9/3/2025
+   Entry Time: 9/3/2025, 6:04:00 AM
+   Exit Time: 9/3/2025, 6:04:00 PM
+   Status: active
+--------------------------------------------------
+
+3. Reservation ID: RES1756902850976WIEUC
+   Driver: RANDIM (qwer@gmail.com)
+   Parking Slot: A004 - Ground Floor - Section A
+   Reserved Date: 9/3/2025
+   Entry Time: 9/3/2025, 6:04:00 AM
+   Exit Time: 9/3/2025, 6:04:00 PM
+   Status: active
+--------------------------------------------------
+
+
+Total Reservations: 3

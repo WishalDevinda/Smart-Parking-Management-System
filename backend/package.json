@@ -1,26 +1,29 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Smart-Parking-Management-System-(AutoSlot)",
-  "main": "app.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node seedDatabase.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/WishalDevinda/Smart-Parking-Management-System.git"
-  },
-  "author": "Wishal Devinda",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/WishalDevinda/Smart-Parking-Management-System/issues"
-  },
-  "homepage": "https://github.com/WishalDevinda/Smart-Parking-Management-System#readme",
+  "type": "commonjs",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "mongoose": "^8.18.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.0",
+    "socket.io": "^4.8.1",
+    "pdfkit": "^0.15.0"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.10"
   }
 }
